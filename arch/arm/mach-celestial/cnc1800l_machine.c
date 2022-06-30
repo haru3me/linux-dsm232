@@ -17,10 +17,10 @@
 #define CNC1800L_VIRT_UART0 0xfec00000
 
 static struct map_desc cnc1800l_of_io_desc[] __initdata = {
-#ifdef CONFIG_DEBUG_UART_8250
+#ifdef CONFIG_DEBUG_CELESTIAL_UART
 	{
 		.virtual = CNC1800L_VIRT_UART0,
-		.pfn = __phys_to_pfn(CNC1800L_VIRT_UART0),
+		.pfn = __phys_to_pfn(0x801f1000),
 		.length = SZ_4K,
 		.type = MT_DEVICE,
 	},

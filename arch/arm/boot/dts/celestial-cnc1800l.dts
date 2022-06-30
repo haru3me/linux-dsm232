@@ -7,8 +7,12 @@
     model = "Cavium Celestial CNC1800L";
     compatible = "cavium,cnc1800l";
 
+	aliases {
+		serial0 = &uart0;
+	};
+
     chosen {
-		stdout-path = "/uart@801f1000:115200";
+		stdout-path = "serial0:115200n8";
 	};
 
 
@@ -24,7 +28,6 @@
 		cpu {
 			compatible = "arm,arm1176jzf";
 			device_type = "cpu";
-            // clocks = <&timer0>;
 		};
 	};
 
@@ -49,29 +52,31 @@
 	};
 
 	timer0: timer@801e2000 {
-		compatible = "snps,dw-apb-timer";
-		interrupts = <10>;
+		compatible = "snps,dw-apb-timer-cnc1800l";
 		reg = <0x801e2000 0x100>;
-        clocks = <&timclk>, <&pclk>;
-        clock-names = "timer", "pclk";
-        // clock-frequency = <94500000>;
-        // #clock-cells = <1>;
+        clocks = <&pclk>;
 	};
 
-    
+	timer1: timer@80270000 {
+		compatible = "cavium,cnc1800l-timer";
+		reg = <0x80270000 0x100>;
+		clocks = <&timclk>;
+		interrupts = <4>;
+	};
+
 	watchdog0: wd@801e1000 {
 		compatible = "snps,dw-wdt";
 		reg = <0x801e1000 0x100>;
 		interrupts = <0>;
 		clocks = <&pclk>;
-		// resets = <&rst WDT0_RESET>;
 	};
 
 
-	uart0: uart@801f1000 {
-		compatible = "ns8250";
+	uart0: serial@801f1000 {
+		compatible = "snps,dw-apb-uart";
 		reg = <0x801f1000 0x100>;
-		clock-frequency = <47250000>;
+		reg-io-width = <1>;
+		clocks = <&pclk>;
 		interrupts = <12>;
 		reg-shift = <2>;
 	};
