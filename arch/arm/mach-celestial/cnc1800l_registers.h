@@ -25,4 +25,11 @@
 #define PA_TIMER1_BASE             (PA_IO_REGS_BASE + 0x180000)
 #define PA_APB_TIMER_BASE          (PA_IO_REGS_BASE + 0xe2000)
 #define PA_VIC_BASE                (PA_IO_REGS_BASE + 0x40000)
+#define PA_I2C_BASE                (PA_IO_REGS_BASE + 0x70000)
+#define PA_I2C2_BASE               (PA_IO_REGS_BASE + 0x74000)
+#define PA_FPC_BASE                (PA_IO_REGS_BASE + 0x72000)
+#define PA_GPIO_BASE               (PA_IO_REGS_BASE + 0x160000)
+#define PA_SCI_BASE                (PA_IO_REGS_BASE + 0xf0000)
+#define PA_USB_EHCI_BASE           (PA_IO_REGS_BASE + 0x100000)
+#define PA_USB_OHCI_BASE           (PA_IO_REGS_BASE + 0x110000)
 #endif

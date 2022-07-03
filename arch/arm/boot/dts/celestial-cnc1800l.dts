@@ -80,4 +80,22 @@
 		interrupts = <12>;
 		reg-shift = <2>;
 	};
+
+	clock-controller@b2100000  {
+			compatible = "cavium,cnc1800l-clockctrl";
+			reg = <0xb2100000 0x1000>;
+			clocks = <&pclk>;
+	};
+
+	usb0: ohci@80210000 {
+		compatible = "cavium,cnc1800l-ohci", "usb-ohci";
+		reg = <0x80210000 0x1000>;
+		interrupts = <27>;
+	};
+
+	usb1: ehci@80210000 {
+		compatible = "cavium,cnc1800l-ehci", "usb-ehci";
+		reg = <0x80200000 0x1000>;
+		interrupts = <22>;
+	};
 };
