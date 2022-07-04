@@ -98,4 +98,12 @@
 		reg = <0x80200000 0x1000>;
 		interrupts = <22>;
 	};
+
+	nand0: nand@a4000000 {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		compatible = "cavium,cnc1800l-nand";
+		reg = 	<0x80100000 0x48>,			//SMC
+				<0xa4000000 0x2000000>;		//NAND
+	};
 };
