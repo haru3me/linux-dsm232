@@ -106,4 +106,13 @@
 		reg = 	<0x80100000 0x48>,			//SMC
 				<0xa4000000 0x2000000>;		//NAND
 	};
+
+	gpio@80260000 {
+		compatible = "cavium,cnc1800l-gpio";
+		reg = <0x80260000 0x100>;
+		gpio-controller;
+		#gpio-cells = <2>;
+		// interrupts = <6>;
+		cavium,nrdevs = <14>;
+	};
 };
