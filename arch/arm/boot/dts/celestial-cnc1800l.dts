@@ -65,10 +65,10 @@
 	};
 
 	watchdog0: wd@801e1000 {
-		compatible = "snps,dw-wdt";
+		compatible = "snps,dw-wdt", "cavium,cnc1800l-wdt";
 		reg = <0x801e1000 0x100>;
 		interrupts = <0>;
-		clocks = <&pclk>;
+		clocks = <&timclk>;
 	};
 
 

@@ -38,6 +38,40 @@ static void __init cnc1800l_init_machine(void)
     return;
 }
 
+//based on board_bcm281xx.c
+static void cnc1800l_restart(enum reboot_mode mode, const char *cmd){
+	struct device_node *np_wdog;
+	unsigned short __iomem *p;
+
+	np_wdog = of_find_compatible_node(NULL, NULL, "cavium,cnc1800l-wdt");
+	if (!np_wdog) {
+		pr_emerg("Couldn't find cavium,cnc1800l-wdt\n");
+		return;
+	}
+
+	p = (unsigned short*)of_iomap(np_wdog, 0);
+
+	of_node_put(np_wdog);
+	if (!p) {
+		pr_emerg("failed to obtain wdt vaddress\n");
+		return;
+	}
+
+	/* WDT_TORR */
+	p[2] = 0x0;					
+	p[3] = 0x0; 
+	/* WDT_CCVR */
+	p[4] = 0x0;
+	p[5] = 0x0;
+
+	//reload
+	*((u32*)&p[6]) = 0x76;
+	/* WDT_CR, enable WDT and generated System Reset */
+	p[0] = 0x1;
+
+	while(1);
+}
+
 static const char * const cnc1800l_dt_match[] = {
 	"cavium,cnc1800l",
 	NULL
@@ -46,5 +80,6 @@ static const char * const cnc1800l_dt_match[] = {
 DT_MACHINE_START(CNC1800L, "Cavium Celestial CNC1800L")
 	.map_io		= cnc1800l_of_map_io,
 	.init_machine	= cnc1800l_init_machine,
+	.restart	= cnc1800l_restart,
 	.dt_compat	= cnc1800l_dt_match,
 MACHINE_END
