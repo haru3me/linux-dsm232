@@ -65,6 +65,8 @@
 
 #define PADDR   0x80100000
 
+// original partition structure. 
+#if 0
 static struct mtd_partition cnc_nand_partitions[] = {
 	{
 		.name		= "cavm_miniloader",
@@ -169,6 +171,76 @@ static struct mtd_partition cnc_nand_partitions[] = {
 		.name		= "customer_area",
 		.offset		= MTDPART_OFS_APPEND,
 		.size		= SZ_4M, //MTDPART_SIZ_FULL,
+		.mask_flags	= 0,
+	}
+};
+#endif
+
+static struct mtd_partition cnc_nand_partitions[] = {
+	{
+		.name		= "cavm_miniloader",
+		.offset		= 0,
+		.size		= SZ_128K,
+		.mask_flags	= MTD_WRITEABLE,/*Read only*/
+	}, {
+		.name		= "cavm_uboot1",
+		.offset		= MTDPART_OFS_APPEND,
+		.size		= SZ_512K,
+		.mask_flags	= MTD_WRITEABLE,/*Read only*/
+	}, {
+		.name		= "cavm_uboot1_pad",
+		.offset		= MTDPART_OFS_APPEND,
+		.size		= SZ_512K,
+		.mask_flags	= 0,
+	}, {
+		.name		= "cavm_nvram_factory",
+		.offset		= MTDPART_OFS_APPEND,
+		.size		= SZ_128K,
+		.mask_flags	= MTD_WRITEABLE,/*Read only*/
+	}, {
+		.name		= "cavm_nvram_factory_pad",
+		.offset		= MTDPART_OFS_APPEND,
+		.size		= SZ_128K,
+		.mask_flags	= MTD_WRITEABLE,/*Read only*/
+	}, {
+		.name		= "cavm_nvram1b",
+		.offset		= MTDPART_OFS_APPEND,
+		.size		= SZ_128K,
+		.mask_flags	= MTD_WRITEABLE,/*Read only*/
+	}, {
+		.name		= "cavm_nvram2",
+		.offset		= MTDPART_OFS_APPEND,
+		.size		= SZ_128K,
+		.mask_flags	= 0,
+	}, {
+		.name		= "cavm_nvram2b",
+		.offset		= MTDPART_OFS_APPEND,
+		.size		= SZ_128K,
+		.mask_flags	= 0,
+	}, {
+		.name		= "cavm_splash",
+		.offset		= MTDPART_OFS_APPEND,
+		.size		= SZ_2M,
+		.mask_flags	= 0,
+	}, {
+		.name		= "cavm_all_img1_info",
+		.offset		= MTDPART_OFS_APPEND,
+		.size		= SZ_128K,
+		.mask_flags	= MTD_WRITEABLE,/*Read only*/
+	}, {
+		.name		= "cavm_all_img1_info_pad",
+		.offset		= MTDPART_OFS_APPEND,
+		.size		= SZ_128K,
+		.mask_flags	= MTD_WRITEABLE,/*Read only*/
+	}, {
+		.name		= "kernel",
+		.offset		= MTDPART_OFS_APPEND,
+		.size		= SZ_8M,
+		.mask_flags	= 0,
+	}, {
+		.name		= "rootfs",
+		.offset		= MTDPART_OFS_APPEND,
+		.size		= MTDPART_SIZ_FULL,
 		.mask_flags	= 0,
 	}
 };
